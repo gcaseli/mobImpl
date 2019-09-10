@@ -3,8 +3,8 @@ package com.mobiquityinc.usecases;
 import com.mobiquityinc.entities.PackageVO;
 import java.util.List;
 
-public interface ReaderPackage {
+public interface FilterPackage {
 
-    List<PackageVO> getPackagesFromFile(String pathFile);
+    StringBuffer getIndexesFromPackage(List<PackageVO> packages);
 
 }

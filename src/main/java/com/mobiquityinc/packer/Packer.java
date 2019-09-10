@@ -1,24 +1,35 @@
 package com.mobiquityinc.packer;
 
+import com.mobiquityinc.entities.PackageVO;
 import com.mobiquityinc.exception.APIException;
+import com.mobiquityinc.usecases.FilterPackage;
+import com.mobiquityinc.usecases.FilterPackageImpl;
+import com.mobiquityinc.usecases.ReaderPackage;
+import com.mobiquityinc.usecases.ReaderPackageImpl;
 import java.io.File;
 import java.nio.file.InvalidPathException;
+import java.util.List;
 
 public class Packer {
 
+    private static ReaderPackage readerPackage = new ReaderPackageImpl();
+    private static FilterPackage filterPackage = new FilterPackageImpl();
+
     private Packer() {
-    }
-
-    public static void main(String[] args) {
-
-
     }
 
     public static String pack(String filePath) throws APIException {
 
         isValidPath(filePath);
 
-        return "";
+        List<PackageVO> packagesFromFile = readerPackage.getPackagesFromFile(filePath);
+        StringBuffer indexesFromPackage = filterPackage.getIndexesFromPackage(packagesFromFile);
+
+        int lastIndexOfLineSeparator = indexesFromPackage.lastIndexOf(System.lineSeparator());
+
+        String indexes = indexesFromPackage.substring(0, lastIndexOfLineSeparator);
+
+        return indexes;
     }
 
     private static void isValidPath(String path) throws APIException {
@@ -29,9 +40,12 @@ public class Packer {
             }
 
             File file = new File(path);
-            if (!file.exists()) {
+            if (!file.exists())
                 throw new APIException("File does not exists in path:" + path);
-            }
+
+            if (file.length() == 0)
+                throw new APIException("File should not be empty in path:" + path);
+
         } catch (InvalidPathException | NullPointerException ex) {
             throw new APIException("Error when read path:" + path, ex);
         }

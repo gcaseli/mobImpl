@@ -18,7 +18,6 @@ public class ReaderPackageTest {
         Assert.assertEquals(packageVOS.size(), 4);
     }
 
-
     @Test
     public void shouldHasPackageValues() throws IOException {
 
@@ -30,7 +29,7 @@ public class ReaderPackageTest {
 
         Assert.assertNotNull(packageVO);
 
-        Assert.assertEquals(packageVO.getWeightPackage(), Integer.valueOf(81));
+        Assert.assertEquals(packageVO.getWeightPackage(), Double.valueOf(81));
 
         Assert.assertEquals(packageVO.getThings().size(), 6);
     }

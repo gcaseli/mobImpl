@@ -2,6 +2,7 @@ package com.mobiquityinc.usecases;
 
 import com.mobiquityinc.entities.PackageVO;
 import com.mobiquityinc.entities.ThingVO;
+import com.mobiquityinc.exception.APIException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
@@ -13,11 +14,16 @@ import java.util.stream.Collectors;
 
 public class ReaderPackageImpl implements ReaderPackage{
 
-    public List<PackageVO> getPackagesFromFile(String pathFile) throws IOException {
+    public List<PackageVO> getPackagesFromFile(String pathFile) {
 
-        return Files
-                .lines(Paths.get(pathFile))
-                .map(mapLineToPackage).collect(Collectors.toList());
+        try {
+            return Files
+                    .lines(Paths.get(pathFile))
+                    .map(mapLineToPackage).collect(Collectors.toList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     Function<String, PackageVO> mapLineToPackage = line -> {
@@ -42,7 +48,7 @@ public class ReaderPackageImpl implements ReaderPackage{
             buildThing(thingsVO, things);
         }
 
-        return new PackageVO(Integer.valueOf(packageWeight.trim()), thingsVO);
+        return new PackageVO(Double.valueOf(packageWeight.trim()), thingsVO);
     };
 
     private String[] getThings(String s) {
