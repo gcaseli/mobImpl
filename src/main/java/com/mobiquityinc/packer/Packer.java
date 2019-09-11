@@ -2,10 +2,10 @@ package com.mobiquityinc.packer;
 
 import com.mobiquityinc.entities.PackageVO;
 import com.mobiquityinc.exception.APIException;
-import com.mobiquityinc.usecases.FilterPackage;
-import com.mobiquityinc.usecases.FilterPackageImpl;
-import com.mobiquityinc.usecases.ReaderPackage;
-import com.mobiquityinc.usecases.ReaderPackageImpl;
+import com.mobiquityinc.usecases.filter.FilterPackage;
+import com.mobiquityinc.usecases.filter.FilterPackageImpl;
+import com.mobiquityinc.usecases.read.ReaderPackage;
+import com.mobiquityinc.usecases.read.ReaderPackageImpl;
 import java.io.File;
 import java.nio.file.InvalidPathException;
 import java.util.List;

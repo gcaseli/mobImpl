@@ -2,22 +2,25 @@ package com.mobiquityinc.entities;
 
 import java.util.List;
 
+/*
+    This class encapsulate data about the package
+ */
 public class PackageVO {
 
-    private Double weightPackage;
+    private Double packageWeight;
 
-    private List<ThingVO> things;
+    private List<ItemVO> items;
 
-    public PackageVO(Double weightPackage, List<ThingVO> things) {
-        this.weightPackage = weightPackage;
-        this.things = things;
+    public PackageVO(Double packageWeight, List<ItemVO> items) {
+        this.packageWeight = packageWeight;
+        this.items = items;
     }
 
-    public Double getWeightPackage() {
-        return weightPackage;
+    public Double getPackageWeight() {
+        return packageWeight;
     }
 
-    public List<ThingVO> getThings() {
-        return things;
+    public List<ItemVO> getItems() {
+        return items;
     }
 }
