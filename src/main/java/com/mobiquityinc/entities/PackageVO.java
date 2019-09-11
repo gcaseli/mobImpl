@@ -1,5 +1,8 @@
 package com.mobiquityinc.entities;
 
+import com.mobiquityinc.entities.constraints.ConstrainsFactory;
+import com.mobiquityinc.entities.constraints.Constraints;
+import com.mobiquityinc.exception.APIException;
 import java.util.List;
 
 /*
@@ -11,9 +14,17 @@ public class PackageVO {
 
     private List<ItemVO> items;
 
-    public PackageVO(Double packageWeight, List<ItemVO> items) {
+    public PackageVO(Double packageWeight, List<ItemVO> items) throws APIException {
         this.packageWeight = packageWeight;
         this.items = items;
+
+        validatePackage();
+    }
+
+    private void validatePackage() throws APIException {
+        for (Constraints constraint : ConstrainsFactory.packageConstrains()) {
+            constraint.validate(this);
+        }
     }
 
     public Double getPackageWeight() {

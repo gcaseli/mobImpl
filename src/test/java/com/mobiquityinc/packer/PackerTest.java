@@ -6,9 +6,9 @@ import org.junit.Test;
 
 public class PackerTest {
 
-    public static final String FILE_PATH = "src/test/java/resources/";
-    public static final String TEST_FILE_TXT = "testfile.txt";
-    public static final String EMPTY_FILE_TXT = "emptyfile.txt";
+    private static final String FILE_PATH = "src/test/java/resources/";
+    private static final String TEST_FILE_TXT = "testfile.txt";
+    private static final String EMPTY_FILE_TXT = "emptyfile.txt";
 
     @Test(expected = APIException.class)
     public void shouldThrownAnExceptionEmptyPath() throws APIException {
@@ -27,7 +27,14 @@ public class PackerTest {
 
     @Test()
     public void shouldReturnValuesCorrect() throws APIException {
+
+        long startTime = System.currentTimeMillis();
+
         String pack = Packer.pack(FILE_PATH + TEST_FILE_TXT);
+
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("That took " + (endTime - startTime) + " milliseconds");
 
         String resultExpected = "4\n" +
                 "-\n" +

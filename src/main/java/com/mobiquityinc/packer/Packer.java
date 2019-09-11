@@ -2,18 +2,19 @@ package com.mobiquityinc.packer;
 
 import com.mobiquityinc.entities.PackageVO;
 import com.mobiquityinc.exception.APIException;
-import com.mobiquityinc.usecases.filter.FilterPackage;
-import com.mobiquityinc.usecases.filter.FilterPackageImpl;
-import com.mobiquityinc.usecases.read.ReaderPackage;
-import com.mobiquityinc.usecases.read.ReaderPackageImpl;
+import com.mobiquityinc.usecases.processor.ProcessorPackage;
+import com.mobiquityinc.usecases.processor.ProcessorPackageImpl;
+import com.mobiquityinc.usecases.build.BuildPackage;
+import com.mobiquityinc.usecases.build.BuildPackageImpl;
 import java.io.File;
 import java.nio.file.InvalidPathException;
 import java.util.List;
 
 public class Packer {
 
-    private static ReaderPackage readerPackage = new ReaderPackageImpl();
-    private static FilterPackage filterPackage = new FilterPackageImpl();
+    private static BuildPackage buildPackage = new BuildPackageImpl();
+
+    private static ProcessorPackage processorPackage = new ProcessorPackageImpl();
 
     private Packer() {
     }
@@ -22,14 +23,19 @@ public class Packer {
 
         isValidPath(filePath);
 
-        List<PackageVO> packagesFromFile = readerPackage.getPackagesFromFile(filePath);
-        StringBuffer indexesFromPackage = filterPackage.getIndexesFromPackage(packagesFromFile);
+        List<PackageVO> packagesFromFile = buildPackage.getPackagesFromFile(filePath);
+
+        StringBuffer indexesFromPackage = processorPackage.getIndexesFromPackage(packagesFromFile);
 
         int lastIndexOfLineSeparator = indexesFromPackage.lastIndexOf(System.lineSeparator());
 
-        String indexes = indexesFromPackage.substring(0, lastIndexOfLineSeparator);
+        String indexes = removeLastLineSeparator(indexesFromPackage, lastIndexOfLineSeparator);
 
         return indexes;
+    }
+
+    private static String removeLastLineSeparator(StringBuffer indexesFromPackage, int lastIndexOfLineSeparator) {
+        return indexesFromPackage.substring(0, lastIndexOfLineSeparator);
     }
 
     private static void isValidPath(String path) throws APIException {
