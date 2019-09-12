@@ -2,6 +2,9 @@ package com.mobiquityinc.entities.constraints;
 
 import com.mobiquityinc.exception.APIException;
 
+/*
+    This interface has a generic method to validate any kid of object
+ */
 @FunctionalInterface
 public interface Constraints<T> {
 

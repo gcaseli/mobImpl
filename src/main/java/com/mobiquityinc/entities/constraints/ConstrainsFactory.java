@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
-    This interface use Factory Pattern and have static methods that will return the list of constrains
+    This interface use Factory Pattern and have static methods that will return the list of constrains to be validate
  */
 public interface ConstrainsFactory {
 

@@ -3,6 +3,9 @@ package com.mobiquityinc.entities.constraints;
 import com.mobiquityinc.entities.ItemVO;
 import com.mobiquityinc.exception.APIException;
 
+/*
+    Single Responsibility Pattern to validate a weight of ItemVO
+ */
 public class ItemWeightConstraints implements Constraints<ItemVO> {
 
     @Override

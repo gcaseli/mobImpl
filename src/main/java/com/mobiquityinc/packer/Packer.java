@@ -9,6 +9,7 @@ import com.mobiquityinc.usecases.build.BuildPackageImpl;
 import java.io.File;
 import java.nio.file.InvalidPathException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Packer {
 
@@ -18,6 +19,10 @@ public class Packer {
 
     private Packer() {
     }
+
+    /*public static void main(String[] args) {
+        Scanner
+    }*/
 
     public static String pack(String filePath) throws APIException {
 

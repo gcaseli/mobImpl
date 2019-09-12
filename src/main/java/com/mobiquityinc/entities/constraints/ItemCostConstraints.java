@@ -3,6 +3,9 @@ package com.mobiquityinc.entities.constraints;
 import com.mobiquityinc.entities.ItemVO;
 import com.mobiquityinc.exception.APIException;
 
+/*
+    Single Responsibility Pattern to validate a const of ItemVO
+ */
 public class ItemCostConstraints implements Constraints<ItemVO> {
 
     @Override
